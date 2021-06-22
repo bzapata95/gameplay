@@ -18,8 +18,8 @@ export function SignIn() {
 
       <View style={styles.content}>
         <Text style={styles.title}>
-          Organice {"\n"}
-          sus tiempos de juego {"\n"}
+          Conéctate {"\n"}
+          y organice sus juegos {"\n"}
           facilmente
         </Text>
 

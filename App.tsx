@@ -5,6 +5,8 @@ import AppLoading from 'expo-app-loading';
 import { Inter_400Regular, Inter_500Medium } from '@expo-google-fonts/inter'
 import { Rajdhani_700Bold, Rajdhani_500Medium } from '@expo-google-fonts/rajdhani'
 
+import Background from './src/components/Background';
+
 import { SignIn } from "./src/screens/SignIn";
 
 export default function App() {
@@ -20,13 +22,13 @@ export default function App() {
   }
 
   return (
-    <>
+    <Background>
       <StatusBar
         barStyle="light-content"
         backgroundColor="transparent"
         translucent
       />
       <SignIn />
-    </>
+    </Background>
   );
 }

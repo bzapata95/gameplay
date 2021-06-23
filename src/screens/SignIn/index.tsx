@@ -3,6 +3,7 @@ import { View, Text, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import { ButtonIcon } from "../../components/ButtonIcon";
+import Background from "../../components/Background";
 
 import IllustrationImg from "../../assets/illustration.png";
 
@@ -16,26 +17,28 @@ export function SignIn() {
   }
 
   return (
-    <View style={styles.container}>
-      <Image
-        source={IllustrationImg}
-        style={styles.image}
-        resizeMode="stretch"
-      />
+    <Background>
+      <View style={styles.container}>
+        <Image
+          source={IllustrationImg}
+          style={styles.image}
+          resizeMode="stretch"
+        />
 
-      <View style={styles.content}>
-        <Text style={styles.title}>
-          Conéctate {"\n"}y organice sus juegos {"\n"}
-          facilmente
-        </Text>
+        <View style={styles.content}>
+          <Text style={styles.title}>
+            Conéctate {"\n"}y organice sus juegos {"\n"}
+            facilmente
+          </Text>
 
-        <Text style={styles.subtitle}>
-          Crea grupos para jugar sus juegos {"\n"}
-          favoritos con sus amigos
-        </Text>
+          <Text style={styles.subtitle}>
+            Crea grupos para jugar sus juegos {"\n"}
+            favoritos con sus amigos
+          </Text>
 
-        <ButtonIcon onPress={handleSignIn} title="Entrar con Discord" />
+          <ButtonIcon onPress={handleSignIn} title="Entrar con Discord" />
+        </View>
       </View>
-    </View>
+    </Background>
   );
 }

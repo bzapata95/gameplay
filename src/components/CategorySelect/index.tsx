@@ -11,11 +11,13 @@ import { styles } from "./styles";
 interface CategorySelectProps {
   categorySelected: string;
   setCategory: (categoryId: string) => void;
+  hasCheckBox?: boolean;
 }
 
 function CategorySelect({
   categorySelected,
   setCategory,
+  hasCheckBox = false,
 }: CategorySelectProps) {
   return (
     <ScrollView
@@ -31,6 +33,7 @@ function CategorySelect({
           icon={category.icon}
           checked={category.id === categorySelected}
           onPress={() => setCategory(category.id)}
+          hasCheckBox={hasCheckBox}
         />
       ))}
     </ScrollView>

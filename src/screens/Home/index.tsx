@@ -9,6 +9,8 @@ import ListHeader from "../../components/ListHeader";
 import Appointment from "../../components/Appointment";
 import DividerList from "../../components/DividerList";
 
+import Background from "../../components/Background";
+
 import { styles } from "./styles";
 
 interface HomeProps {}
@@ -47,7 +49,7 @@ function Home({}: HomeProps) {
     categoryId === category ? setCategory("") : setCategory(categoryId);
   }
   return (
-    <View style={styles.container}>
+    <Background>
       <View style={styles.header}>
         <Profile />
         <ButtonAdd />
@@ -69,7 +71,7 @@ function Home({}: HomeProps) {
           ItemSeparatorComponent={() => <DividerList />}
         />
       </View>
-    </View>
+    </Background>
   );
 }
 

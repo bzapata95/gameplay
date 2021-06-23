@@ -23,6 +23,7 @@ export const styles = StyleSheet.create({
     fontFamily: theme.fonts.title700,
     color: theme.colors.heading,
     fontSize: 15,
+    marginTop: 20,
   },
   check: {
     position: "absolute",

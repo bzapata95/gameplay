@@ -32,6 +32,9 @@ function AppointmentCreate({}: AppointmentCreateProps) {
   function handleOpenGuildModal() {
     setOpenGuildModal(true);
   }
+  function handleCloseGuildModal() {
+    setOpenGuildModal(false);
+  }
 
   function handleGuildSelect(guildSelect: GuildProps) {
     setGuild(guildSelect);
@@ -82,7 +85,9 @@ function AppointmentCreate({}: AppointmentCreateProps) {
 
           <View style={styles.field}>
             <View>
-              <Text style={styles.label}>Día y mes</Text>
+              <Text style={[styles.label, { marginBottom: 12 }]}>
+                Día y mes
+              </Text>
               <View style={styles.column}>
                 <SmallInput maxLength={2} />
                 <Text style={styles.divider}>/</Text>
@@ -91,7 +96,9 @@ function AppointmentCreate({}: AppointmentCreateProps) {
             </View>
 
             <View>
-              <Text style={styles.label}>Hora y minuto</Text>
+              <Text style={[styles.label, { marginBottom: 12 }]}>
+                Hora y minuto
+              </Text>
               <View style={styles.column}>
                 <SmallInput maxLength={2} />
                 <Text style={styles.divider}>:</Text>
@@ -114,7 +121,7 @@ function AppointmentCreate({}: AppointmentCreateProps) {
         {/* </Background> */}
       </ScrollView>
 
-      <ModalView visible={openGuildModal}>
+      <ModalView visible={openGuildModal} closeModal={handleCloseGuildModal}>
         <Guilds handleGuildSelect={handleGuildSelect} />
       </ModalView>
     </KeyboardAvoidingView>

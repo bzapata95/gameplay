@@ -18,6 +18,54 @@ function Guilds({ handleGuildSelect }: GuildsProps) {
       icon: null,
       owner: true,
     },
+    {
+      id: "2",
+      name: "Legendarios",
+      icon: null,
+      owner: true,
+    },
+    {
+      id: "3",
+      name: "Legendarios",
+      icon: null,
+      owner: true,
+    },
+    {
+      id: "4",
+      name: "Legendarios",
+      icon: null,
+      owner: true,
+    },
+    {
+      id: "5",
+      name: "Legendarios",
+      icon: null,
+      owner: true,
+    },
+    {
+      id: "6",
+      name: "Legendarios",
+      icon: null,
+      owner: true,
+    },
+    {
+      id: "7",
+      name: "Legendarios",
+      icon: null,
+      owner: true,
+    },
+    {
+      id: "8",
+      name: "Legendarios",
+      icon: null,
+      owner: true,
+    },
+    {
+      id: "9",
+      name: "Legendarios",
+      icon: null,
+      owner: true,
+    },
   ];
   return (
     <View style={styles.container}>
@@ -27,9 +75,11 @@ function Guilds({ handleGuildSelect }: GuildsProps) {
         renderItem={({ item }) => (
           <Guild data={item} onPress={() => handleGuildSelect(item)} />
         )}
-        ItemSeparatorComponent={DividerList}
+        ItemSeparatorComponent={() => <DividerList isCentered />}
         showsVerticalScrollIndicator={false}
         style={styles.guilds}
+        contentContainerStyle={{ paddingBottom: 68, paddingTop: 103 }}
+        ListHeaderComponent={() => <DividerList isCentered />}
       />
     </View>
   );

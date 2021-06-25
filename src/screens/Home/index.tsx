@@ -44,6 +44,54 @@ function Home({}: HomeProps) {
       date: "22/06 a las 20h",
       description: "An any description",
     },
+    {
+      id: "3",
+      guild: {
+        id: "1",
+        name: "Lendários",
+        icon: null,
+        owner: true,
+      },
+      category: "1",
+      date: "22/06 a las 20h",
+      description: "An any description",
+    },
+    {
+      id: "4",
+      guild: {
+        id: "1",
+        name: "Lendários",
+        icon: null,
+        owner: true,
+      },
+      category: "1",
+      date: "22/06 a las 20h",
+      description: "An any description",
+    },
+    {
+      id: "5",
+      guild: {
+        id: "1",
+        name: "Lendários",
+        icon: null,
+        owner: true,
+      },
+      category: "1",
+      date: "22/06 a las 20h",
+      description: "An any description",
+    },
+    {
+      id: "6",
+      guild: {
+        id: "1",
+        name: "Lendários",
+        icon: null,
+        owner: true,
+      },
+      category: "1",
+      date: "22/06 a las 20h",
+      description: "An any description",
+    },
   ];
 
   function handleCategorySelect(categoryId: string) {
@@ -65,19 +113,18 @@ function Home({}: HomeProps) {
         setCategory={handleCategorySelect}
       />
 
-      <View style={styles.content}>
-        <ListHeader title="Partidas agendadas" subtitle="Total 6" />
-        <FlatList
-          data={appointments}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => (
-            <Appointment data={item} onPress={handleAppointmentDetails} />
-          )}
-          style={styles.matches}
-          showsVerticalScrollIndicator={false}
-          ItemSeparatorComponent={() => <DividerList />}
-        />
-      </View>
+      <ListHeader title="Partidas agendadas" subtitle="Total 6" />
+      <FlatList
+        data={appointments}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <Appointment data={item} onPress={handleAppointmentDetails} />
+        )}
+        style={styles.matches}
+        showsVerticalScrollIndicator={false}
+        ItemSeparatorComponent={() => <DividerList />}
+        contentContainerStyle={{ paddingBottom: 69 }}
+      />
     </Background>
   );
 }

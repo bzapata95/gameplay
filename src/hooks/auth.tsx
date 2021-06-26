@@ -33,6 +33,7 @@ interface AuthContextData {
   user: User;
   loading: boolean;
   signIn: () => Promise<void>;
+  signOut: () => Promise<void>;
 }
 
 export const AuthContext = createContext({} as AuthContextData);
@@ -88,8 +89,13 @@ function AuthProvider({ children }: AuthProviderProps) {
       setLoading(false);
     }
   }, []);
+
+  const signOut = useCallback(async () => {
+    setUser({} as User);
+    await AsyncStorage.removeItem(COLLECTION_USER);
+  }, []);
   return (
-    <AuthContext.Provider value={{ user, loading, signIn }}>
+    <AuthContext.Provider value={{ user, loading, signIn, signOut }}>
       {children}
     </AuthContext.Provider>
   );

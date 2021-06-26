@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import uuid from "react-native-uuid";
 import { RectButton } from "react-native-gesture-handler";
 import {
   View,
@@ -21,13 +22,23 @@ import { Button } from "../../components/Button";
 import { styles } from "./styles";
 import { theme } from "../../global/styles/theme";
 import { GuildProps } from "../../components/Guild";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { COLLECTION_APPOINTMENT } from "../../config/storage";
+import { useNavigation } from "@react-navigation/native";
 
 interface AppointmentCreateProps {}
 
 function AppointmentCreate({}: AppointmentCreateProps) {
-  const [category, setCategory] = useState("");
+  const navigate = useNavigation();
   const [openGuildModal, setOpenGuildModal] = useState(false);
+
+  const [category, setCategory] = useState("");
   const [guild, setGuild] = useState<GuildProps>({} as GuildProps);
+  const [day, setDay] = useState("");
+  const [month, setMonth] = useState("");
+  const [hour, setHour] = useState("");
+  const [minute, setMinute] = useState("");
+  const [description, setDescription] = useState("");
 
   function handleOpenGuildModal() {
     setOpenGuildModal(true);
@@ -39,6 +50,26 @@ function AppointmentCreate({}: AppointmentCreateProps) {
   function handleGuildSelect(guildSelect: GuildProps) {
     setGuild(guildSelect);
     setOpenGuildModal(false);
+  }
+
+  async function handleSave() {
+    const newAppointment = {
+      id: uuid.v4(),
+      guild,
+      category,
+      date: `${day}/${month} a las ${hour}:${minute}h`,
+      description,
+    };
+
+    const storage = await AsyncStorage.getItem(COLLECTION_APPOINTMENT);
+    const appointments = storage ? JSON.parse(storage) : [];
+
+    await AsyncStorage.setItem(
+      COLLECTION_APPOINTMENT,
+      JSON.stringify([...appointments, newAppointment])
+    );
+
+    navigate.navigate("Home");
   }
 
   return (
@@ -93,9 +124,9 @@ function AppointmentCreate({}: AppointmentCreateProps) {
                 Día y mes
               </Text>
               <View style={styles.column}>
-                <SmallInput maxLength={2} />
+                <SmallInput maxLength={2} onChangeText={setDay} />
                 <Text style={styles.divider}>/</Text>
-                <SmallInput maxLength={2} />
+                <SmallInput maxLength={2} onChangeText={setMonth} />
               </View>
             </View>
 
@@ -104,9 +135,9 @@ function AppointmentCreate({}: AppointmentCreateProps) {
                 Hora y minuto
               </Text>
               <View style={styles.column}>
-                <SmallInput maxLength={2} />
+                <SmallInput maxLength={2} onChangeText={setHour} />
                 <Text style={styles.divider}>:</Text>
-                <SmallInput maxLength={2} />
+                <SmallInput maxLength={2} onChangeText={setMinute} />
               </View>
             </View>
           </View>
@@ -115,10 +146,16 @@ function AppointmentCreate({}: AppointmentCreateProps) {
             <Text style={styles.label}>Descripción</Text>
             <Text style={styles.characterLimit}>Max 100 caracteres</Text>
           </View>
-          <TextArea multiline maxLength={100} numberOfLines={5} autoCorrect />
+          <TextArea
+            multiline
+            maxLength={100}
+            numberOfLines={5}
+            autoCorrect
+            onChangeText={setDescription}
+          />
 
           <View style={styles.footer}>
-            <Button title="Registrar" />
+            <Button title="Registrar" onPress={handleSave} />
           </View>
         </View>
 

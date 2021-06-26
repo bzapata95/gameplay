@@ -4,11 +4,14 @@ import React, {
   useState,
   useContext,
   useCallback,
+  useEffect,
 } from "react";
 import * as AuthSession from "expo-auth-session";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { DISCORD_APP } from "../config/discordAuth";
 import discordApi from "../services/discordApi";
+import { COLLECTION_USER } from "../config/storage";
 
 interface User {
   id: string;
@@ -42,6 +45,19 @@ function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User>({} as User);
   const [loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    (async function () {
+      const storage = await AsyncStorage.getItem(COLLECTION_USER);
+      if (storage) {
+        const userLogged = JSON.parse(storage);
+        discordApi.defaults.headers.authorization = `Bearer ${userLogged.token}`;
+        setUser(userLogged);
+      } else {
+        setUser({} as User);
+      }
+    })();
+  }, []);
+
   const signIn = useCallback(async () => {
     try {
       setLoading(true);
@@ -56,12 +72,13 @@ function AuthProvider({ children }: AuthProviderProps) {
         const userInfo = await discordApi.get("/users/@me");
         const [firstName] = userInfo.data.username.split(" ");
         userInfo.data.avatar = `${DISCORD_APP.CDN_IMAGE}/avatars/${userInfo.data.id}/${userInfo.data.avatar}.png`;
-
-        setUser({
+        const userData = {
           ...userInfo.data,
           firstName,
           token: params.access_token,
-        });
+        };
+        await AsyncStorage.setItem(COLLECTION_USER, JSON.stringify(userData));
+        setUser(userData);
       } else {
         setLoading(false);
       }

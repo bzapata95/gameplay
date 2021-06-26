@@ -1,0 +1,4 @@
+export const DATABASE_NAME = "@gameplay";
+
+export const COLLECTION_USER = `${DATABASE_NAME}:USER`;
+export const COLLECTION_APPOINTMENT = `${DATABASE_NAME}:APPOINTMENT`;

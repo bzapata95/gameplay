@@ -1,14 +1,27 @@
 import React from "react";
 
-import { Image } from "react-native";
+import { View, Image } from "react-native";
+import { DISCORD_APP } from "../../config/discordAuth";
+import DiscordSVG from "../../assets/discord.svg";
 
 import { styles } from "./styles";
 
-interface GuildIconProps {}
+interface GuildIconProps {
+  guildId: string;
+  iconId: string | null;
+}
 
-function GuildIcon({}: GuildIconProps) {
-  const uri = "https://i.redd.it/s9biyhs4lix61.jpg";
-  return <Image source={{ uri }} style={styles.image} resizeMode="cover" />;
+function GuildIcon({ guildId, iconId }: GuildIconProps) {
+  const uri = `${DISCORD_APP.CDN_IMAGE}/icons/${guildId}/${iconId}.png`;
+  return (
+    <View style={styles.container}>
+      {iconId ? (
+        <Image source={{ uri }} style={styles.image} resizeMode="cover" />
+      ) : (
+        <DiscordSVG width={40} height={40} />
+      )}
+    </View>
+  );
 }
 
 export default GuildIcon;

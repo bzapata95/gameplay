@@ -21,7 +21,8 @@ interface User {
 
 type AuthorizationResponse = AuthSession.AuthSessionResult & {
   params: {
-    access_token: string;
+    access_token?: string;
+    error?: string;
   };
 };
 
@@ -49,7 +50,7 @@ function AuthProvider({ children }: AuthProviderProps) {
         authUrl,
       })) as AuthorizationResponse;
 
-      if (type === "success") {
+      if (type === "success" && !params.error) {
         discordApi.defaults.headers.authorization = `Bearer ${params.access_token}`;
 
         const userInfo = await discordApi.get("/users/@me");

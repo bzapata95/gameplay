@@ -59,7 +59,7 @@ function AppointmentDetails({}: AppointmentDetailsProps) {
         data={members}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => <Member data={item} />}
-        ItemSeparatorComponent={() => <DividerList />}
+        ItemSeparatorComponent={() => <DividerList isCentered />}
         style={styles.members}
       />
 

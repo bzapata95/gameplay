@@ -13,7 +13,7 @@ Gameplay
 [//]: # "Add your gifs/images here:"
 
 <div>
-  <img src="./.github/app.png" alt="Web" height="100%"> 
+  <img src="./.github/app.png" alt="Web" width="100%"> 
 </div>
 
 <hr />
